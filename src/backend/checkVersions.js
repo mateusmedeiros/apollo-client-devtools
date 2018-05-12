@@ -1,10 +1,11 @@
 import genUuid from "uuid/v1";
+import Storage from "../utils/CustomStorage";
 
-let uuid = localStorage.getItem("uuid");
+let uuid = Storage.getItem("uuid");
 
 if (!uuid) {
   uuid = genUuid();
-  localStorage.setItem("uuid", uuid);
+  Storage.setItem("uuid", uuid);
 }
 
 export const checkVersions = (hook, bridge) => {

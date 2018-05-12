@@ -256,7 +256,10 @@ class StoreTreeFieldSet extends React.Component {
   }
 
   getStoreObj() {
-    return this.context.inspectorContext.dataWithOptimistic[this.props.dataId];
+    // TODO: fix this dirty hack || {} for null object;
+    return (
+      this.context.inspectorContext.dataWithOptimistic[this.props.dataId] || {}
+    );
   }
 
   getHighlightObj() {

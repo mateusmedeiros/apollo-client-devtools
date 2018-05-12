@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Storage from "../../utils/CustomStorage";
 import classnames from "classnames";
 
 export class Sidebar extends Component {
@@ -11,7 +12,7 @@ export class Sidebar extends Component {
   }
 
   componentDidMount() {
-    const savedWidth = localStorage.getItem(`apollo-client:${this.props.name}`);
+    const savedWidth = Storage.getItem(`apollo-client:${this.props.name}`);
     if (savedWidth) this.sidebar.style.width = `${savedWidth}px`;
   }
 
@@ -22,7 +23,7 @@ export class Sidebar extends Component {
 
   Resize(e) {
     const width = e.clientX - this.sidebar.offsetLeft;
-    localStorage.setItem(`apollo-client:${this.props.name}`, width);
+    Storage.setItem(`apollo-client:${this.props.name}`, width);
     this.sidebar.style.width = `${width}px`;
     window.getSelection().removeAllRanges();
   }

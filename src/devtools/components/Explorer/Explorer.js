@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import React, { Component } from "react";
 import GraphiQL from "graphiql";
 import uniqBy from "lodash.uniqby";
@@ -6,7 +5,6 @@ import flatten from "lodash.flattendeep";
 import { parse } from "graphql/language/parser";
 import { print } from "graphql/language/printer";
 import {
-  printIntrospectionSchema,
   buildSchema,
   introspectionQuery,
   printSchema,
@@ -21,8 +19,7 @@ import { withBridge } from "../bridge";
 
 import "./graphiql.less";
 import "./graphiql-overrides.less";
-
-let id = 0;
+import Storage from "../../../utils/CustomStorage";
 
 const introAST = parse(introspectionQuery);
 const intro = introspectionQuery.replace(/\s/g, "");
@@ -129,6 +126,8 @@ export const createBridgeLink = bridge =>
   );
 
 export class Explorer extends Component {
+  storage = Storage;
+
   constructor(props, context) {
     super(props, context);
 
@@ -173,6 +172,7 @@ export class Explorer extends Component {
     const { theme } = this.props;
     const graphiql = (
       <GraphiQL
+        storage={this.storage}
         fetcher={this.fetcher}
         query={this.state.query}
         editorTheme={theme === "dark" ? "dracula" : "graphiql"}

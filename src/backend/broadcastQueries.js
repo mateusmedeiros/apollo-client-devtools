@@ -16,6 +16,7 @@ export const initBroadCastEvents = (hook, bridge) => {
 
   bridge.on("panel:ready", () => {
     const client = hook.ApolloClient;
+    client.initQueryManager();
     const initial = {
       queries: client.queryManager.queryStore.getStore(),
       mutations: client.queryManager.mutationStore.getStore(),
